@@ -1,0 +1,157 @@
+{% extends "post/base.html" %}
+
+{% block title %}Create Post{% endblock %}
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        margin-top: 150px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #52dbdb;
+        margin-bottom: 10px;
+        margin-top: 30px;
+    }
+
+    form {
+        width: 100%;
+        max-width: 500px;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    form p {
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        color: #212529;
+    }
+
+    input, textarea, select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        font-size: 1rem;
+        box-sizing: border-box;
+    }
+
+    input:focus, textarea:focus, select:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 4px rgba(0, 123, 255, 0.25);
+    }
+
+    /* Style file input */
+    .custom-file-input {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .custom-file-input input[type="file"] {
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+    }
+
+    .file-label {
+        display: block;
+        padding: 10px;
+        background-color: #f8f9fa;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        text-align: center;
+        cursor: pointer;
+        font-size: 1rem;
+        color: #007bff;
+    }
+
+    .file-label:hover {
+        background-color: #e9ecef;
+    }
+
+    .file-list {
+        font-size: 0.9rem;
+        color: #6c757d;
+        margin-top: 5px;
+    }
+
+    .btn-primary {
+        display: block;
+        width: 100%;
+        text-decoration: none;
+        color: #fff;
+        background-color: #007bff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 1rem;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    a {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        color: #007bff;
+        text-decoration: none;
+        font-size: 0.9rem;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        form {
+            padding: 15px;
+        }
+    }
+</style>
+
+<h2>تجديد المنشور</h2>
+<form action="{% url 'post:update_post' post.pk %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <!-- Custom File Upload -->
+    <label class="file-label" for="file-upload">📂 اختر ملفات للرفع</label>
+    <div class="custom-file-input">
+        <input id="file-upload" type="file" name="upload" multiple>
+    </div>
+    <p class="file-list">يمكنك تحميل صور، مستندات، أو ملفات أخرى.</p>
+
+    <button class="btn btn-primary" type="submit">جدد المنشور</button>
+</form>
+
+<a href="{% url 'post:index' %}">ارجع إلى الرئيسية</a>
+
+{% endblock content %}

@@ -1,0 +1,133 @@
+{% extends "user/base.html" %}
+
+{% block title %}log In{% endblock title %}
+
+{% block content %}
+<style>
+  /* General body styles */
+  body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f7fa;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      margin-top: 150px;
+    
+  }
+
+  /* Page title */
+  h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      color: #52dbdb;
+      margin-top: 20px;
+      padding: auto;
+    }
+
+  /* Error message */
+  .error-message {
+      color: #e74c3c;
+      text-align: center;
+      font-size: 1rem;
+      margin-top: 15px;
+  }
+
+  /* Form styling */
+  form {
+      width: 100%;
+      max-width: 400px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Label and input field styling */
+  label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 8px;
+      color: #2c3e50;
+  }
+
+  input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+      font-size: 1rem;
+      box-sizing: border-box;
+  }
+
+  input:focus {
+      outline: none;
+      border-color: #3498db;
+      box-shadow: 0 0 4px rgba(0, 123, 255, 0.25);
+  }
+
+  button {
+      width: 100%;
+      padding: 12px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  button:hover {
+      background-color: #2980b9;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Link to navigate back */
+  a {
+      display: inline-block;
+      margin-top: 20px;
+      text-align: center;
+      color: #3498db;
+      text-decoration: none;
+      font-size: 1rem;
+  }
+
+  a:hover {
+      text-decoration: underline;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+      form {
+          padding: 15px;
+      }
+
+      h2 {
+          font-size: 2rem;
+      }
+
+      button {
+          padding: 10px;
+      }
+  }
+</style>
+
+  <h2>تسجيل الدخول</h2>
+
+{% if form.error %}
+  <p>حدث خطأ في كلمة المرور او اسم المستخدم.</p>
+{% endif %}
+
+<form method="post" action="{% url 'user:login' %}?next={% url 'post:index' %}">
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{{ next }}">
+  <label for="username">اسم المستخدم:</label>
+  <input type="text" name="username" id="username" required><br>
+  <label for="password">كلمة المرور:</label>
+  <input type="password" name="password" id="password" required><br>ss
+  <button class="btn btn-primary" type="submit">ادخل</button>
+</form>
+
+{% endblock content %}

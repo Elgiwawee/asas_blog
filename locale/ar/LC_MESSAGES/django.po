@@ -1,0 +1,132 @@
+# TRANSLATION INTO ARABIC LANGUAGE.
+# (C) 2025 ASSOCIATION OF ARABIC STUDENTS, AHMADU BELLO UNIVERSITY, ZARIA
+# This file is distributed under the same license as the PACKAGE package.
+# UMAR ZAHARADDEEN <uz3443442@gmail.com>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: asas_blog 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-17 14:32+0100\n"
+"PO-Revision-Date: 2025-01-22 20:00+0100\n"
+"Last-Translator: Umar Zaharaddeen <uz3443442@gmail.com>\n"
+"Language-Team: Arabic <uz3443442@gmail.com>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: .\post\form.py:17 .\post\form.py:34 .\post\form.py:65
+msgid "Title"
+msgstr "العنوان"
+
+#: .\post\form.py:18 .\post\form.py:35
+msgid "Body"
+msgstr "الصلب"
+
+#: .\post\form.py:19 .\post\form.py:36
+msgid "Is_published?"
+msgstr "قد نشر"
+
+#: .\post\form.py:20 .\post\form.py:37 .\post\form.py:51
+msgid "Image"
+msgstr "صورة"
+
+#: .\post\form.py:50
+msgid "Caption"
+msgstr "عنوان"
+
+#: .\post\form.py:66
+msgid "Ducument"
+msgstr "مستند"
+
+#: .\post\views.py:19
+msgid "Post created successfully."
+msgstr "تم انشاء المنشور بنجاح"
+
+#: .\post\views.py:22
+msgid "Failed to create post."
+msgstr "انشاء المنشور غير ناجح"
+
+#: .\post\views.py:46
+msgid "Post updated successfully."
+msgstr "جدد المنشور بنجاح"
+
+#: .\post\views.py:49
+msgid "Failed to update post."
+msgstr "تجديد المنشور غير ناجح"
+
+#: .\post\views.py:65
+msgid "Post deleted successfully."
+msgstr " تم حذف المنشور بنجاح "
+
+#: .\post\views.py:107
+msgid "Image uploaded successfully!"
+msgstr "تم تحميل الصورة بنجاح"
+
+#: .\post\views.py:110
+msgid "Something went wrong!"
+msgstr "حدث خطأ"
+
+#: .\post\views.py:121
+msgid "Image deleted successfully!"
+msgstr "تم حذف الصورة بنجاح"
+
+#: .\post\views.py:138
+msgid "Document uploaded successfully!"
+msgstr "تم تحميل المستند بنجاح"
+
+#: .\post\views.py:141
+msgid "Something went wrong"
+msgstr "حدث خطأ"
+
+#: .\post\views.py:153
+msgid "Document deleted successfully!"
+msgstr "تم حذف المستند بنجاح"
+
+#: .\user\form.py:19
+msgid "Username"
+msgstr "اسم المستخدم"
+
+#: .\user\form.py:20
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: .\user\form.py:21
+msgid "Password"
+msgstr "كلمة المرور"
+
+#: .\user\form.py:22
+msgid "Confirm Password"
+msgstr "أثبت كلمة المرور"
+
+#: .\user\views.py:22
+msgid "You are already registered and logged in."
+msgstr "قد تم تسجيلك و الدخول"
+
+#: .\user\views.py:29
+msgid "Thank you for registering. Please log in."
+msgstr "شكرا على تسجيلك, انقر على الدخول"
+
+#: .\user\views.py:33
+msgid "Please correct the errors below."
+msgstr "بالله صحح الأخطاء التالية"
+
+#: .\user\views.py:53
+msgid "You are now logged in."
+msgstr "دخلت الان"
+
+#: .\user\views.py:57
+msgid "Invalid username or password."
+msgstr "اسم المستخدم أو كلمة المرور غير صحيح"
+
+#: .\user\views.py:66
+msgid ""
+"You are now logged out, thank you for visiting. We hope to see you again."
+msgstr "خرجت الان, نشكرك على الزيارة و نرجو رؤيتك مجددا"
+
+#~ msgid "Upload"
+#~ msgstr "حمل"

@@ -1,0 +1,142 @@
+{% extends "post/base.html" %}
+
+{% block title %}All Created Posts{% endblock %}
+{% block content %}
+<style>
+   body {
+        font-family: 'Roboto', Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        margin-top: 150px;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        color: #2c3e50;
+        margin: 20px 0;
+    }
+
+    .post-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0;
+        gap: 20px;
+    }
+
+    .card-group {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        padding-bottom: 15px;
+    }
+
+    .card-group:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-img-top {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        color: #2c3e50;
+        margin-bottom: 10px;
+    }
+
+    .card-text {
+        font-size: 0.9rem;
+        color: #7f8c8d;
+        margin-bottom: 15px;
+    }
+
+    .file-list {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .file-list a {
+        display: block;
+        color: #3498db;
+        text-decoration: none;
+        font-size: 0.9rem;
+        margin-top: 5px;
+    }
+
+    .file-list a:hover {
+        text-decoration: underline;
+    }
+
+    .btn-primary {
+        display: inline-block;
+        text-decoration: none;
+        color: #fff;
+        background-color: #3498db;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #2980b9;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+</style>  
+
+<h2>المنشورات</h2>
+<div class="post-list">
+    {% for post in posts %}
+    <div class="card-group">
+        {% with post.files.first as first_file %}
+            {% if first_file and first_file.file.url|lower|slice:"-4:" in ".jpg,.png,.jpeg,.gif" %}
+                <img src="{{ image.image.url }}" class="card-img-top" alt="Post Image">
+            {% else %}
+                <img src="https://via.placeholder.com/300x180" class="card-img-top" alt="Default Image">
+            {% endif %}
+        {% endwith %}
+
+        <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">{{ post.body|truncatechars:100 }}</p>
+            
+            <!-- File Attachments -->
+            {% if post.files.all %}
+            <div class="file-list">
+                <strong>📂 الملفات المرفقة:</strong>
+                {% for file in post.files.all %}
+                    {% if file.file.url|lower|slice:"-4:" in ".jpg,.png,.jpeg,.gif" %}
+                        <img src="{{ image.image.url }}" alt="Uploaded Image" style="width: 100px; height: auto; margin-top: 5px;">
+                    {% else %}
+                        <a href="{{ file.file.url }}" target="_blank">📄 {{ file.file.name }}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <a href="{% url 'post:update_post' post.id %}" class="btn btn-primary">تجديد المنشور</a>
+            <a href="{% url 'post:delete_post' post.id %}" class="btn btn-primary">حذف المنشور</a>
+            <a href="{% url 'post:post_details' post.id %}" class="btn btn-primary">اقرأ بالكامل...</a>
+        </div>
+    </div>
+    {% empty %}
+    <p>لا توجد منشورات متاحة</p>
+    {% endfor %}
+</div>
+
+{% endblock content %}

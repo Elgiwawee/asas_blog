@@ -1,0 +1,102 @@
+{% extends "post/base.html" %}
+
+{% block title %}Post Details{% endblock title %}
+
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        margin-top: 150px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #52dbdb;
+        margin-bottom: 10px;
+        margin-top: 30px;
+    }
+
+    /* Post content */
+    p {
+        font-size: 1.1rem;
+        color: #555;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 10px auto;
+        text-align: center;
+    }
+
+    /* Metadata styling */
+    p:last-of-type {
+        color: #888;
+        font-size: 0.9rem;
+        margin-top: 5px;
+    }
+
+    /* Links */
+    a {
+        display: inline-block;
+        margin: 10px 10px;
+        padding: 10px 15px;
+        text-decoration: none;
+        font-size: 1rem;
+        color: #fff;
+        background-color: #3498db;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    a:hover {
+        background-color: #2980b9;
+        box-shadow: 0 4px 8px rgba(80, 74, 74, 0.1);
+    }
+
+    /* Center content */
+    .content-container {
+        text-align: center;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 2rem;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+
+        a {
+            font-size: 0.9rem;
+            padding: 8px 12px;
+        }
+    }
+</style>
+
+<h2>{{ post.title }}</h2>
+
+<!-- Check if there's an upload file and display accordingly -->
+{% if post.upload %}
+    {% if post.upload.url|slice:":4" == 'http' %}
+        <!-- Image File -->
+        <img src="{{ post.upload.url }}" alt="Uploaded Image" style="max-width: 100%; height: auto;">
+    {% else %}
+        <!-- Other file types, provide download link -->
+        <p><a href="{{ post.upload.url }}" download>حمل الملف</a></p>
+    {% endif %}
+{% endif %}
+
+<p>{{ post.body }}</p>
+<p>أنشأه: {{ post.created_by }}</p>
+<p>أنشأه في: {{ post.timestamp }}</p>
+
+<!-- Return to the homepage -->
+<a href="{% url 'post:index' %}">ارجع إلى الرئيسية</a>
+
+{% endblock content %}
