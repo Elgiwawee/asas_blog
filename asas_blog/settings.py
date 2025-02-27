@@ -155,7 +155,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 APPEND_SLASH = True
 CSRF_TRUSTED_ORIGINS = [
-    'https://127.0.0.1:8000',  # Replace with your local development server's IP address and port
+    'https://asasblog-production.up.railway.app',  # Replace with your local development server's IP address and port
 ]
 
-#CSRF_FAILURE_VIEW = "user.views.custum_csrf_failure_view
+#CSRF_FAILURE_VIEW = "user.views.custum_csrf_failure_viewss
