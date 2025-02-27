@@ -28,7 +28,7 @@ def register_user(request):
             new_user=form.save()
             messages.info(request, _('Thank you for registering. Please log in.'))
             login(request, new_user)
-            return redirect('post:index')
+            return redirect('user:login')
         else:
             messages.error(request, _('Please correct the errors below.'))
     else:
