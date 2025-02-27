@@ -154,12 +154,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 APPEND_SLASH = True
-
-'''CSRF_TRUSTED_ORIGINS = [
+CSRF_TRUSTED_ORIGINS = [
     'https://127.0.0.1:8000',  # Replace with your local development server's IP address and port
-    'https://abuasasblog.com',  # Replace with your domain name
-    'https://www.abuasasblog.com',  # Replace with another domain name
-    # Add more domains as needed
-]'''
+]
 
 #CSRF_FAILURE_VIEW = "user.views.custum_csrf_failure_view
