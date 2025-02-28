@@ -11,12 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 import dj_database_url
-import environ
 
 from pathlib import Path
-
-env = environ.Env()
-environ.Env.read_env() 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
