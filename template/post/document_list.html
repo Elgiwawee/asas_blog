@@ -100,7 +100,7 @@
 <div class="document-list">
     {% for document in documents %}
         <div class="document-card">
-            {% if document.file.url|lower|slice:"-4:" == ".pdf" %}
+            {% if document.media_url|lower|slice:"-4:" == ".pdf" %}
                 <div class="document-icon pdf-icon">📕</div>  {# PDF icon #}
             {% else %}
                 <div class="document-icon">📄</div>  {# Default document icon #}
@@ -109,13 +109,13 @@
             <h3>{{ document.title }}</h3>
 
             <div class="document-preview">
-                <iframe src="https://docs.google.com/gview?url={{ document.file.url }}&embedded=true"></iframe>
+                <iframe src="https://docs.google.com/gview?url={{ document.media_url }}&embedded=true"></iframe>
             </div>
 
             <p>{{ document.description|truncatechars:100 }}</p>
 
-            <a href="{{ document.file.url }}" target="_blank" class="btn btn-primary">🔍 عرض</a>
-            <a href="{{ document.file.url }}" download class="btn btn-download">⬇️ تحميل</a>
+            <a href="{{ document.media_url }}" target="_blank" class="btn btn-primary">🔍 عرض</a>
+            <a href="{{ document.media_url }}" download class="btn btn-download">⬇️ تحميل</a>
 
             {% if user.is_authenticated %}
                 <a href="{% url 'post:delete_document' document.id %}" class="btn btn-danger">🗑 حذف</a>

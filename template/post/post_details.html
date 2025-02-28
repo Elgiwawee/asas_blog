@@ -85,7 +85,7 @@
 {% if post.upload %}
     {% if post.upload.url|slice:":4" == 'http' %}
         <!-- Image File -->
-        <img src="{{ post.upload.url }}" alt="Uploaded Image" style="max-width: 100%; height: auto;">
+        <img src="{{ image.media_url }}" alt="Uploaded Image" style="max-width: 100%; height: auto;">
     {% else %}
         <!-- Other file types, provide download link -->
         <p><a href="{{ post.upload.url }}" download>حمل الملف</a></p>

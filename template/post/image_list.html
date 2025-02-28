@@ -85,7 +85,7 @@
     <div class="gallery">
         {% for image in images %}
             <div class="image-card">
-                <img src="{{ image.image.url }}" alt="{{ image.caption }}">
+                <img src="{{ image.media_url }}" alt="{{ image.caption }}">
                 <div class="image-info">
                     <p>{{ image.caption|truncatechars:50 }}</p>
                     <small>{{ image.created_at|date:"M d, Y" }}</small>
