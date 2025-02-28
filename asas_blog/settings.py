@@ -11,8 +11,12 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 import dj_database_url
+import environ
 
 from pathlib import Path
+
+env = environ.Env()
+environ.Env.read_env() 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -77,6 +81,7 @@ TEMPLATES = [
                 'django.template.context_processors.request', 
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     } ,
@@ -140,12 +145,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_URL = "static/"
+STATIC_ROOT = "/var/www/asasblog-production.up.railway.app/static/"
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-MEDIA_URL = '/media/'  
+STATIC_URL = "media/" 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
