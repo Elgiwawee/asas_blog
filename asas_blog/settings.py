@@ -146,7 +146,7 @@ STATIC_ROOT = "/var/www/asasblog-production.up.railway.app/static/"
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-STATIC_URL = "media/" 
+MEDIA_URL = "media/" 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
