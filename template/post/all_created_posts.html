@@ -105,7 +105,7 @@
     <div class="card-group">
         {% with post.files.first as first_file %}
             {% if first_file and first_file.file.url|lower|slice:"-4:" in ".jpg,.png,.jpeg,.gif" %}
-                <img src="{{ image.media_url }}" class="card-img-top" alt="Post Image">
+                <img src="{{ images.media_url }}" class="card-img-top" alt="Post Image">
             {% else %}
                 <img src="https://via.placeholder.com/300x180" class="card-img-top" alt="Default Image">
             {% endif %}
@@ -121,9 +121,9 @@
                 <strong>📂 الملفات المرفقة:</strong>
                 {% for file in post.files.all %}
                     {% if file.file.url|lower|slice:"-4:" in ".jpg,.png,.jpeg,.gif" %}
-                        <img src="{{ image.media_url }}" alt="Uploaded Image" style="width: 100px; height: auto; margin-top: 5px;">
+                        <img src="{{ images.media_url }}" alt="Uploaded Image" style="width: 100px; height: auto; margin-top: 5px;">
                     {% else %}
-                        <a href="{{ file.media_url }}" target="_blank">📄 {{ file.file.name }}</a>
+                        <a href="{{ documents.media_url }}" target="_blank">📄 {{ file.file.name }}</a>
                     {% endif %}
                 {% endfor %}
             </div>
