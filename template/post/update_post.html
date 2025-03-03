@@ -142,13 +142,6 @@
     {% csrf_token %}
     {{ form.as_p }}
 
-    <!-- Custom File Upload -->
-    <label class="file-label" for="file-upload">📂 اختر ملفات للرفع</label>
-    <div class="custom-file-input">
-        <input id="file-upload" type="file" name="upload" multiple>
-    </div>
-    <p class="file-list">يمكنك تحميل صور، مستندات، أو ملفات أخرى.</p>
-
     <button class="btn btn-primary" type="submit">جدد المنشور</button>
 </form>
 
