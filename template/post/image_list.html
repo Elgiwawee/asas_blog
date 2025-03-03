@@ -81,21 +81,26 @@
     }
 
 </style>
-    <h1>العطار الصور</h1>
-    <div class="gallery">
-        {% for image in images %}
-            <div class="image-card">
-                <img src="{{ images.media.url }}" >
-                <div class="image-info">
-                    <p>{{ image.caption|truncatechars:50 }}</p>
-                    <small>{{ image.created_at|date:"M d, Y" }}</small>
 
-                    {% if user.is_authenticated %}
-                    <a href="{% url 'post:add_image' %}" class="btn">التحميل الصورة الجديدة</a>
-                    <a href="{% url 'post:delete_image' image.id %}" class="btn btn-danger">الحذف</a>
-                    {% endif %}
-                </div>
+<h1>📸 معرض الصور</h1>
+
+<div class="gallery">
+    {% for image in images %}
+        <div class="image-card">
+            <img src="{{ image.image.url }}" alt="{{ image.caption }}">
+            <div class="image-info">
+                <p>{{ image.caption|truncatechars:50 }}</p>
+                <small>{{ image.created_at|date:"M d, Y" }}</small>
+
+                {% if user.is_authenticated %}
+                    <a href="{% url 'post:add_image' %}" class="btn">📤 تحميل صورة جديدة</a>
+                    <a href="{% url 'post:delete_image' image.id %}" class="btn btn-danger">🗑️ حذف</a>
+                {% endif %}
             </div>
-        {% endfor %}
-    </div>
+        </div>
+    {% empty %}
+        <p style="text-align: center;">🚫 لا توجد صور مرفوعة حتى الآن.</p>
+    {% endfor %}
+</div>
+
 {% endblock %}

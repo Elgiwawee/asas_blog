@@ -1,3 +1,4 @@
+
 {% extends "post/base.html" %}
 {% load static %}
 {% block title %}All Created Posts{% endblock %}
@@ -103,28 +104,32 @@
 <div class="post-list">
     {% for post in posts %}
     <div class="card-group">
-        {% with post.files.first as first_file %}
-            {% if first_file and first_file.file.url|lower|slice:"-4:" in ".jpg,.png,.jpeg,.gif" %}
-                <img src="{{ images.media.url }}" class="card-img-top">
-            {% else %}
-                <img src="https://via.placeholder.com/300x180" class="card-img-top" >
-            {% endif %}
-        {% endwith %}
+        {% if post.image %}
+            <img src="{{ post.image.url }}" class="card-img-top">
+        {% elif post.post_images.all %}
+            <img src="{{ post.post_images.first.image.url }}" class="card-img-top">
+        {% else %}
+            <img src="https://via.placeholder.com/300x180" class="card-img-top">
+        {% endif %}
 
         <div class="card-body">
             <h5 class="card-title">{{ post.title }}</h5>
             <p class="card-text">{{ post.body|truncatechars:100 }}</p>
-            
-            <!-- File Attachments -->
-            {% if post.files.all %}
+
+            {% if post.post_images.all %}
             <div class="file-list">
-                <strong>📂 الملفات المرفقة:</strong>
-                {% for image in post.files.all %}
-                    {% if image.media.url|lower|slice:"-4:" in ".jpg,.png,.jpeg,.gif" %}
-                        <img src="{{ images.media.url }}" style="width: 100px; height: auto; margin-top: 5px;">
-                    {% else %}
-                        <a href="{{ images.media.url }}" target="_blank">📄 {{ image.image.name }}</a>
-                    {% endif %}
+                <strong>📂 الصور المرفقة:</strong>
+                {% for image in post.post_images.all %}
+                    <img src="{{ image.image.url }}" style="width: 100px; height: auto; margin-top: 5px;">
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if post.post_documents.all %}
+            <div class="file-list">
+                <strong>📂 المستندات المرفقة:</strong>
+                {% for document in post.post_documents.all %}
+                    <a href="{{ document.document.url }}" target="_blank">📄 {{ document.title }}</a>
                 {% endfor %}
             </div>
             {% endif %}
@@ -132,9 +137,9 @@
             <a href="{% url 'post:post_details' post.id %}" class="btn btn-primary">اقرأ بالكامل...</a>
         </div>
     </div>
-    {% empty %}
+{% empty %}
     <p>لا توجد منشورات متاحة</p>
-    {% endfor %}
+{% endfor %}
 </div>
 
 {% endblock content %}

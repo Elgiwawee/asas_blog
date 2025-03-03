@@ -104,10 +104,16 @@
     {% for post in posts %}
     <div class="card-group">
         {% with post.files.first as first_file %}
-            {% if first_file and first_file.file.url|lower|slice:"-4:" in ".jpg,.png,.jpeg,.gif" %}
-                <img src="{{ image.media_url }}" class="card-img-top" >
+            {% if first_file %}
+                {% with first_file.file.url|lower as file_url %}
+                    {% if file_url|slice:"-4:" == ".jpg" or file_url|slice:"-4:" == ".png" or file_url|slice:"-5:" == ".jpeg" or file_url|slice:"-4:" == ".gif" %}
+                        <img src="{{ first_file.file.url }}" class="card-img-top">
+                    {% else %}
+                        <img src="https://via.placeholder.com/300x180" class="card-img-top">
+                    {% endif %}
+                {% endwith %}
             {% else %}
-                <img src="https://via.placeholder.com/300x180" class="card-img-top" >
+                <img src="https://via.placeholder.com/300x180" class="card-img-top">
             {% endif %}
         {% endwith %}
 
@@ -120,11 +126,13 @@
             <div class="file-list">
                 <strong>📂 الملفات المرفقة:</strong>
                 {% for file in post.files.all %}
-                    {% if file.file.url|lower|slice:"-4:" in ".jpg,.png,.jpeg,.gif" %}
-                        <img src="{{ image.media.url }}"  style="width: 100px; height: auto; margin-top: 5px;">
-                    {% else %}
-                        <a href="{{ image.media.url }}" target="_blank">📄 {{ file.file.name }}</a>
-                    {% endif %}
+                    {% with file.file.url|lower as file_url %}
+                        {% if file_url|slice:"-4:" == ".jpg" or file_url|slice:"-4:" == ".png" or file_url|slice:"-5:" == ".jpeg" or file_url|slice:"-4:" == ".gif" %}
+                            <img src="{{ file.file.url }}" style="width: 100px; height: auto; margin-top: 5px;">
+                        {% else %}
+                            <a href="{{ file.file.url }}" target="_blank">📄 {{ file.file.name }}</a>
+                        {% endif %}
+                    {% endwith %}
                 {% endfor %}
             </div>
             {% endif %}
