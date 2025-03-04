@@ -10,23 +10,24 @@ from.models import Post, Image, Document
 @csrf_protect
 def create_post(request):
     activate('ar')
+    
     if request.method == 'POST':
-        form = CreatePostForm(request.POST)
+        form = CreatePostForm(request.POST, request.FILES)  # ✅ Handle file uploads
         if form.is_valid():
-            var = form.save(commit=False)
-            var.created_by = request.user
-            var.save()
-            messages.info(request, _('Post created successfully.'))
-            return redirect('post:index')
+            post = form.save(commit=False)
+            post.created_by = request.user
+            post.save()
+            messages.success(request, _('تم إنشاء المنشور بنجاح.'))
+            return redirect('post:all_created_posts')  # ✅ Redirect to all posts
         else:
-            messages.error(request, _('Failed to create post.'))
-            return redirect('post:create_post')
+            messages.error(request, _('فشل في إنشاء المنشور.'))
+    
     else:
         form = CreatePostForm()
+    
     context = {'form': form}
     return render(request, 'post/create_post.html', context)
-
-
+    
 # view post details
 def post_details(request, pk):
     activate('ar')
@@ -38,20 +39,23 @@ def post_details(request, pk):
 @csrf_protect
 def update_post(request, pk):
     activate('ar')
-    post = Post.objects.get(pk=pk)
+    post = get_object_or_404(Post, pk=pk)  # ✅ Better error handling
+    
     if request.method == 'POST':
-        form = CreatePostForm(request.POST, instance=post)
+        form = CreatePostForm(request.POST, request.FILES, instance=post)  # ✅ Include files
         if form.is_valid():
             form.save()
-            messages.info(request, _('Post updated successfully.'))
-            return redirect('post:index')
+            messages.success(request, _('تم تحديث المنشور بنجاح.'))
+            return redirect('post:all_created_posts')  # ✅ Redirect to all posts
         else:
-            messages.error(request, _('Failed to update post.'))
-            return redirect('post:update_post', pk=pk)
+            messages.error(request, _('فشل في تحديث المنشور.'))
+    
     else:
         form = CreatePostForm(instance=post)
+    
     context = {'form': form, 'post': post}
     return render(request, 'post/update_post.html', context)
+
 
 
 # delete post
@@ -72,10 +76,18 @@ def delete_post(request, pk):
 @csrf_protect
 def all_created_posts(request):
     activate('ar')
-    posts = Post.objects.filter(created_by=request.user.id)
-    context = {'posts': posts}
-    return render(request, 'post/all_created_posts.html', context)
+    posts = Post.objects.filter(created_by=request.user)
+    form = CreatePostForm(request.POST or None, request.FILES or None)
     
+    if request.method == "POST" and form.is_valid():
+        new_post = form.save(commit=False)
+        new_post.created_by = request.user  # Assign the logged-in user
+        new_post.save()
+        return redirect('post:all_created_posts')
+
+    context = {'posts': posts, 'form': form}
+    return render(request, 'post/all_created_posts.html', context)
+
 
 # homepage
 @csrf_protect
