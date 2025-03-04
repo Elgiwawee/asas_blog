@@ -103,25 +103,19 @@
 <div class="post-list">
     {% for post in posts %}
     <div class="card-group">
-        {% with post.files.first as first_file %}
-            {% if first_file %}
-                {% with first_file.file.url|lower as file_url %}
-                    {% if file_url|slice:"-4:" == ".jpg" or file_url|slice:"-4:" == ".png" or file_url|slice:"-5:" == ".jpeg" or file_url|slice:"-4:" == ".gif" %}
-                        <img src="{{ image.image.url }}" class="card-img-top">
-                    {% else %}
-                        <img src="https://via.placeholder.com/300x180" class="card-img-top">
-                    {% endif %}
-                {% endwith %}
-            {% else %}
-                <img src="https://via.placeholder.com/300x180" class="card-img-top">
-            {% endif %}
-        {% endwith %}
+        {% for image in images %}
+        <div class="image-card">
+            <img src="{{ image.image.url }}" alt="{{ image.caption }}">
+            <div class="image-info">
+                <p>{{ image.caption|truncatechars:50 }}</p>
+                <small>{{ image.created_at|date:"M d, Y" }}</small>
+        {% endfor %}
 
         <div class="card-body">
             <h5 class="card-title">{{ post.title }}</h5>
             <p class="card-text">{{ post.body|truncatechars:100 }}</p>
             
-            <!-- File Attachments -->
+            <!-- File Attachments
             {% if post.files.all %}
             <div class="file-list">
                 <strong>📂 الملفات المرفقة:</strong>
@@ -135,7 +129,7 @@
                     {% endwith %}
                 {% endfor %}
             </div>
-            {% endif %}
+            {% endif %} -->
 
             <a href="{% url 'post:update_post' post.id %}" class="btn btn-primary">تجديد المنشور</a>
             <a href="{% url 'post:delete_post' post.id %}" class="btn btn-primary">حذف المنشور</a>
