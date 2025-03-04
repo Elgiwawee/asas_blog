@@ -107,7 +107,7 @@
             {% if first_file %}
                 {% with first_file.file.url|lower as file_url %}
                     {% if file_url|slice:"-4:" == ".jpg" or file_url|slice:"-4:" == ".png" or file_url|slice:"-5:" == ".jpeg" or file_url|slice:"-4:" == ".gif" %}
-                        <img src="{{ first_file.file.url }}" class="card-img-top">
+                        <img src="{{ image.image.url }}" class="card-img-top">
                     {% else %}
                         <img src="https://via.placeholder.com/300x180" class="card-img-top">
                     {% endif %}
