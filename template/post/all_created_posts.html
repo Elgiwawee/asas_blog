@@ -103,17 +103,19 @@
 <div class="post-list">
     {% for post in posts %}
     <div class="card-group">
-        {% for image in images %}
+        {% if post.image %}
         <div class="image-card">
             <img src="{{ image.image.url }}" alt="{{ image.caption }}">
             <div class="image-info">
                 <p>{{ image.caption|truncatechars:50 }}</p>
                 <small>{{ image.created_at|date:"M d, Y" }}</small>
+
+        {% endif %}
+  
         <div class="card-body">
             <h5 class="card-title">{{ post.title }}</h5>
             <p class="card-text">{{ post.body|truncatechars:100 }}</p>
-        {% endfor %}
-  
+        
             <!-- File Attachments
             {% if post.files.all %}
             <div class="file-list">
