@@ -8,8 +8,14 @@
             font-family: Arial, sans-serif;
             direction: rtl; /* Right-to-left layout for Arabic */
             background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
+            margin-top: 140px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #2f4a64;
+            margin: 20px 0;
         }
 
         .container {
@@ -19,11 +25,6 @@
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-        }
-
-        h2 {
-            text-align: center;
-            color: #333;
         }
 
         /* Card Group for Posts */
@@ -97,6 +98,7 @@
         }
     </style>
 <!-- Display Posts in Card Group -->
+<h2>المنشورات</h2>
     {% if posts %}
         <div class="card-group">
             {% for post in posts %}
@@ -113,6 +115,9 @@
                     </div>
                 </div>
             {% endfor %}
+            <a href="{% url 'post:update_post' post.id %}" class="btn btn-primary">تجديد المنشور</a>
+            <a href="{% url 'post:delete_post' post.id %}" class="btn btn-primary">حذف المنشور</a>
+            <a href="{% url 'post:post_details' post.id %}" class="btn btn-primary">اقرأ بالكامل...</a>
         </div>
     {% else %}
         <p class="no-posts">لا توجد منشورات حتى الآن.</p>
