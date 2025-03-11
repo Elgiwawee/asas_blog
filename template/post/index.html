@@ -116,7 +116,11 @@
                 </div>
             {% endfor %}
            
+            {% if post.id %}
             <a href="{% url 'post:post_details' post.id %}" class="btn btn-primary">اقرأ بالكامل...</a>
+            {% else %}
+            <a href="#" class="btn btn-secondary disabled">غير متوفر</a>
+            {% endif %}
            
         </div>
     {% else %}
