@@ -115,9 +115,9 @@
                     </div>
                 </div>
             {% endfor %}
-            {% if post.id %}
+           
             <a href="{% url 'post:post_details' post.id %}" class="btn btn-primary">اقرأ بالكامل...</a>
-            {% endif %}
+           
         </div>
     {% else %}
         <p class="no-posts">لا توجد منشورات حتى الآن.</p>
